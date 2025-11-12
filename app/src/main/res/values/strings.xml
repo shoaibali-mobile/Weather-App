@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">WeatherApp</string>
+    <string name="app_title">Weather App</string>
+    
+    <!-- Login Screen -->
+    <string name="login_title">Login</string>
+    <string name="email_label">Email</string>
+    <string name="email_hint">Enter your email</string>
+    <string name="password_label">Password</string>
+    <string name="password_hint">Enter your password</string>
+    <string name="show_password">Show password</string>
+    <string name="hide_password">Hide password</string>
+    <string name="signup_button_text">New user? Signup</string>
+    <string name="login_button_text">Login</string>
+</resources>
