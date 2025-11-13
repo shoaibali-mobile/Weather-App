@@ -11,5 +11,48 @@
     <string name="show_password">Show password</string>
     <string name="hide_password">Hide password</string>
     <string name="signup_button_text">New user? Signup</string>
+    <string name="signup_button_text_action">Signup</string>
     <string name="login_button_text">Login</string>
+    
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_history">History</string>
+    
+    <!-- Validation Error Messages -->
+    <string name="error_email_required">Email is required</string>
+    <string name="error_email_invalid">Please enter a valid email address</string>
+    <string name="error_password_required">Password is required</string>
+    <string name="error_password_min_length">Password must be at least 6 characters</string>
+    <string name="error_first_name_required">First name is required</string>
+    <string name="error_last_name_required">Last name is required</string>
+    <string name="error_confirm_password_required">Please confirm your password</string>
+    <string name="error_passwords_not_match">Passwords do not match</string>
+    
+    <!-- Toast Messages -->
+    <string name="toast_login_success">Login successful</string>
+    <string name="toast_signup_success">User registered successfully</string>
+    
+    <!-- Signup Screen -->
+    <string name="signup_title">Sign Up</string>
+    <string name="first_name_label">First Name</string>
+    <string name="first_name_hint">Enter your first name</string>
+    <string name="last_name_label">Last Name</string>
+    <string name="last_name_hint">Enter your last name</string>
+    <string name="confirm_password_label">Confirm Password</string>
+    <string name="confirm_password_hint">Re-enter your password</string>
+    <string name="already_user_login">Already a user? Login</string>
+    
+    <!-- Location Error Messages -->
+    <string name="error_location_permission_not_granted">Location permission not granted</string>
+    <string name="error_unable_to_fetch_location">Unable to fetch location</string>
+    <string name="error_failed_to_get_location">Failed to get location: %1$s</string>
+    <string name="error_unknown">Unknown error</string>
+    
+    <!-- Auth Error Messages -->
+    <string name="error_signup_failed">Sign up failed</string>
+    <string name="error_login_failed">Login failed</string>
+    
+    <!-- Weather Screen -->
+    <string name="weather_icon_description">Weather icon</string>
+    <string name="temperature_format">%1$.0f°C</string>
 </resources>

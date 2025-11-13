@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.res.stringResource
 import com.shoaib.weatherapp.R
 import com.shoaib.weatherapp.utils.constants
+import com.shoaib.weatherapp.presentation.theme.TypographySizes
 import kotlinx.coroutines.delay
 
 
@@ -27,7 +28,7 @@ fun SplashScreen(
     val configuration = LocalConfiguration.current
 
     val textSize = (configuration.screenWidthDp * 0.12f)
-        .coerceIn(32f, 64f)
+        .coerceIn(TypographySizes.TitleMin.value, TypographySizes.TitleMax.value)
         .sp
 
     LaunchedEffect(Unit) {

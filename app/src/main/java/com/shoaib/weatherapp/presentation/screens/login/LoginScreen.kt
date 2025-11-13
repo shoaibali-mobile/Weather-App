@@ -21,6 +21,8 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -38,7 +40,12 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.res.stringResource
 import com.shoaib.weatherapp.R
 import com.shoaib.weatherapp.presentation.theme.Dimens
+import com.shoaib.weatherapp.presentation.theme.TypographySizes
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.shoaib.weatherapp.presentation.model.AuthUiState
+import com.shoaib.weatherapp.presentation.viewModel.auth.AuthViewModel
+import com.shoaib.weatherapp.utils.getEmailError
+import com.shoaib.weatherapp.utils.getPasswordError
 import kotlinx.coroutines.delay
 
 
@@ -46,6 +53,7 @@ import kotlinx.coroutines.delay
 fun LoginScreen(
     onNavigateToHome: () -> Unit,
     onSignUpClick: () -> Unit,
+    viewModel: AuthViewModel
 ) {
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
@@ -53,6 +61,33 @@ fun LoginScreen(
     var passwordError by rememberSaveable { mutableStateOf<String?>(null) }
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
 
+    val authState by viewModel.authState.collectAsState()
+    val context = LocalContext.current
+    val resources = context.resources
+
+    LaunchedEffect(authState) {
+        when (val state = authState) {
+            is AuthUiState.LoginSuccess -> {
+                Toast.makeText(
+                    context,
+                    resources.getString(R.string.toast_login_success),
+                    Toast.LENGTH_SHORT
+                ).show()
+                delay(1000)
+                onNavigateToHome()
+                viewModel.resetState()
+            }
+            is AuthUiState.Error -> {
+                Toast.makeText(
+                    context,
+                    state.message,
+                    Toast.LENGTH_SHORT
+                ).show()
+                viewModel.resetState()
+            }
+            else -> {}
+        }
+    }
 
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -91,7 +126,15 @@ fun LoginScreen(
 
             LoginButton(
                 onClick = {
-                    onNavigateToHome()
+                    val emailErr = email.getEmailError(resources)
+                    val passwordErr = password.getPasswordError(resources)
+
+                    emailError = emailErr
+                    passwordError = passwordErr
+
+                    if (emailErr == null && passwordErr == null) {
+                        viewModel.login(email, password)
+                    }
                 },
                 modifier = Modifier.fillMaxWidth()
             )
@@ -182,7 +225,7 @@ fun LoginTitle(
 ) {
     Text(
         text = stringResource(R.string.login_title),
-        fontSize = 32.sp,
+        fontSize = TypographySizes.TitleLarge,
         fontWeight = FontWeight.Bold,
         color = MaterialTheme.colorScheme.onBackground,
         textAlign = TextAlign.Center,
