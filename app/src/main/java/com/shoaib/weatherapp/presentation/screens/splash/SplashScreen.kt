@@ -15,7 +15,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.res.stringResource
 import com.shoaib.weatherapp.R
-import com.shoaib.weatherapp.utils.constants
+import com.shoaib.weatherapp.utils.Constants
 import com.shoaib.weatherapp.presentation.theme.TypographySizes
 import kotlinx.coroutines.delay
 
@@ -32,7 +32,7 @@ fun SplashScreen(
         .sp
 
     LaunchedEffect(Unit) {
-        delay(constants.SPLASH_DELAY_MS)
+        delay(Constants.SPLASH_DELAY_MS)
 
             onNavigateToLogin()
 

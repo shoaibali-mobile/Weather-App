@@ -1,6 +1,5 @@
 package com.shoaib.weatherapp.presentation.screens.home
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,6 +14,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import com.shoaib.weatherapp.R
 import com.shoaib.weatherapp.presentation.model.WeatherUiState
 import com.shoaib.weatherapp.presentation.screens.home.components.WeatherContent
 import com.shoaib.weatherapp.presentation.viewModel.weather.WeatherViewModel
@@ -43,7 +44,8 @@ fun HomeScreen(
     )
 
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
         when (val state = weatherState.value) {
@@ -54,7 +56,7 @@ fun HomeScreen(
             }
             WeatherUiState.Idle -> {
                 Box(Modifier.fillMaxSize(), Alignment.Center) {
-                    Text("Fetching live weather data 🌦️")
+                    Text(stringResource(R.string.fetching_live_weather_data))
                 }
             }
             WeatherUiState.Loading -> {
@@ -71,13 +73,18 @@ fun HomeScreen(
                         if (latitude != null && longitude != null) {
                             viewModel.fetchWeather(lat = latitude!!, lon = longitude!!)
                         } else {
-                            locationPermissionHandler.getCurrentLocation(
-                                onLocationReceived = { lat, lon ->
-                                    latitude = lat
-                                    longitude = lon
-                                    viewModel.fetchWeather(lat = lat, lon = lon)
+                            if (locationPermissionHandler.hasLocationPermission()) {
+                                try {
+                                    locationPermissionHandler.getCurrentLocation(
+                                        onLocationReceived = { lat, lon ->
+                                            latitude = lat
+                                            longitude = lon
+                                            viewModel.fetchWeather(lat = lat, lon = lon)
+                                        }
+                                    )
+                                } catch (e: SecurityException) {
                                 }
-                            )
+                            }
                         }
                     }
                 )

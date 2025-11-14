@@ -1,12 +1,11 @@
 package com.shoaib.weatherapp.presentation.viewModel.auth
 
-import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shoaib.weatherapp.presentation.model.AuthUiState
 import com.shoaib.weatherapp.domain.usecase.LoginUseCase
 import com.shoaib.weatherapp.domain.usecase.SignUpUseCase
-import com.shoaib.weatherapp.R
+import com.shoaib.weatherapp.utils.Constants
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -34,7 +33,7 @@ class AuthViewModel @Inject constructor(
                 }
                 .onFailure { exception ->
                     _authState.value = AuthUiState.Error(
-                        exception.message ?:"Sign up failed"
+                        exception.message ?: Constants.ERROR_SIGNUP_FAILED
                     )
                 }
         }
@@ -49,7 +48,7 @@ class AuthViewModel @Inject constructor(
                 }
                 .onFailure { exception ->
                     _authState.value = AuthUiState.Error(
-                        exception.message ?: "error_login_failed"
+                        exception.message ?: Constants.ERROR_LOGIN_FAILED
                     )
                 }
         }

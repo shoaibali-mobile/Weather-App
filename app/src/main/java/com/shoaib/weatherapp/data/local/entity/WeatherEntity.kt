@@ -2,10 +2,10 @@ package com.shoaib.weatherapp.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.shoaib.weatherapp.utils.constants
+import com.shoaib.weatherapp.utils.Constants
 
 
-@Entity(tableName = constants.WEATHER_TABLE)
+@Entity(tableName = Constants.WEATHER_TABLE)
 data class WeatherEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0L,

@@ -55,4 +55,20 @@
     <!-- Weather Screen -->
     <string name="weather_icon_description">Weather icon</string>
     <string name="temperature_format">%1$.0f°C</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
+    <string name="fetching_live_weather_data">Fetching live weather data 🌦️</string>
+    <string name="weather_history">Weather History</string>
+    <string name="delete">Delete</string>
+    <string name="no_weather_history_yet">No weather history yet</string>
+    <string name="refresh">Refresh</string>
+    <string name="delete_weather_records">Delete Weather Records?</string>
+    <string name="are_you_sure_you_want_to_delete_weather_records">Are you sure you want to delete weather records?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="date_month_year">dd MMM yyyy • hh:mm a</string>
+    <string name="sunrise_history">☀️ Sunrise: %1$s</string>
+    <string name="sunset_history">🌙 Sunset: %1$s</string>
+    <string name="city_country">%1$s, %2$s</string>
+    <string name="temperature">%1$s°C</string>
 </resources>

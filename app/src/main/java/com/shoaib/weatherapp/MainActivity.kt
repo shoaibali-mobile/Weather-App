@@ -7,13 +7,17 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.shoaib.weatherapp.presentation.viewModel.auth.AuthViewModel
 import com.shoaib.weatherapp.presentation.navigation.AppRoute
+import com.shoaib.weatherapp.presentation.screens.bottomNav.bottomNavigationBar.NavigationBottomBar
+import com.shoaib.weatherapp.presentation.screens.history.HistoryScreen
 import com.shoaib.weatherapp.presentation.screens.home.HomeScreen
 import com.shoaib.weatherapp.presentation.screens.login.LoginScreen
 import com.shoaib.weatherapp.presentation.screens.signup.SignUpScreen
@@ -56,7 +60,18 @@ class MainActivity : ComponentActivity() {
 
             WeatherAppTheme(darkTheme = false) {
                 val navController = rememberNavController()
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                val backStackEntry by navController.currentBackStackEntryAsState()
+                val currentRoute = backStackEntry?.destination?.route
+                val isNavBarVisible = AppRoute.shouldShowBottomBar(currentRoute)
+
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    bottomBar = {
+                        if(isNavBarVisible) {
+                            NavigationBottomBar(navController = navController)
+                        }
+                    }
+                ) { innerPadding ->
                     NavHost(
                         navController = navController,
                         startDestination = AppRoute.Splash.route,
@@ -106,6 +121,11 @@ class MainActivity : ComponentActivity() {
                             )
                         }
 
+                        composable(AppRoute.History.route) {
+                            HistoryScreen(
+                                viewModel = weatherViewModel,
+                            )
+                        }
                     }
                 }
             }

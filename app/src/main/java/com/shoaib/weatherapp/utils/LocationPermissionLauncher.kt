@@ -24,9 +24,13 @@ fun rememberLocationPermissionLauncher(
         contract = ActivityResultContracts.RequestPermission()
     ) { isGranted ->
         if (isGranted) {
-            locationPermissionHandler.getCurrentLocation(
-                onLocationReceived = onLocationReceived
-            )
+            try {
+                locationPermissionHandler.getCurrentLocation(
+                    onLocationReceived = onLocationReceived
+                )
+            } catch (e: SecurityException) {
+                // Permission was revoked at runtime
+            }
         } else {
 
             if (activity != null) {
@@ -39,9 +43,13 @@ fun rememberLocationPermissionLauncher(
     
     LaunchedEffect(Unit) {
         if (locationPermissionHandler.hasLocationPermission()) {
-            locationPermissionHandler.getCurrentLocation(
-                onLocationReceived = onLocationReceived
-            )
+            try {
+                locationPermissionHandler.getCurrentLocation(
+                    onLocationReceived = onLocationReceived
+                )
+            } catch (e: SecurityException) {
+                // Permission was revoked at runtime
+            }
         } else {
             locationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }

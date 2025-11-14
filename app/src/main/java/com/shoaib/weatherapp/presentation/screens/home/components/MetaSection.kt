@@ -5,8 +5,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import com.shoaib.weatherapp.R
 import com.shoaib.weatherapp.domain.model.Weather
+import com.shoaib.weatherapp.utils.formatEpoch
 
 @Composable
 fun MetaSection(weather: Weather) {
@@ -16,21 +18,15 @@ fun MetaSection(weather: Weather) {
     ) {
         LabeledValue(
             iconRes = R.drawable.sunrise,
-            label = "Sunrise",
-            value = formatEpoch(weather.sunriseEpoch)
+            label = stringResource(R.string.sunrise),
+            value = weather.sunriseEpoch.formatEpoch()
         )
         LabeledValue(
             iconRes = R.drawable.sunset,
-            label = "Sunset",
-            value = formatEpoch(weather.sunsetEpoch)
+            label = stringResource(R.string.sunset),
+            value = weather.sunsetEpoch.formatEpoch()
         )
     }
-}
-
-private fun formatEpoch(epoch: Long): String {
-    if (epoch <= 0L) return "--:--"
-    val sdf = java.text.SimpleDateFormat("hh:mm a", java.util.Locale.getDefault())
-    return sdf.format(java.util.Date(epoch * 1000))
 }
 
 

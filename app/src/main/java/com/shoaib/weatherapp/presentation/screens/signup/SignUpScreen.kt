@@ -19,7 +19,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import com.shoaib.weatherapp.presentation.model.AuthUiState
 import com.shoaib.weatherapp.presentation.theme.Dimens
 import com.shoaib.weatherapp.presentation.screens.signup.components.ConfirmPasswordTextField
@@ -27,9 +26,9 @@ import com.shoaib.weatherapp.presentation.screens.signup.components.FirstNameTex
 import com.shoaib.weatherapp.presentation.screens.signup.components.LastNameTextField
 import com.shoaib.weatherapp.presentation.screens.signup.components.SignUpTitle
 import com.shoaib.weatherapp.presentation.viewModel.auth.AuthViewModel
-import com.shoaib.weatherapp.presentation.screens.login.EmailTextField
-import com.shoaib.weatherapp.presentation.screens.login.LoginButton
-import com.shoaib.weatherapp.presentation.screens.login.PasswordTextField
+import com.shoaib.weatherapp.presentation.screens.login.components.EmailTextField
+import com.shoaib.weatherapp.presentation.screens.login.components.LoginButton
+import com.shoaib.weatherapp.presentation.screens.login.components.PasswordTextField
 import com.shoaib.weatherapp.presentation.screens.signup.components.SignUpButton
 import com.shoaib.weatherapp.utils.getEmailError
 import com.shoaib.weatherapp.utils.getPasswordError
